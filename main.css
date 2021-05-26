@@ -1,0 +1,279 @@
+@import url("https://use.typekit.net/mzd5zle.css");
+
+:root {
+  --navBarBackground: hsl(240, 19%, 29%) /* rgb(48, 111, 247) */;
+  --navBarColor: white;
+  --hamburgerColor: var(--navBarColor);
+
+  --linkHoverColor: #3773fd;
+  --activeLinkColor: #1db005;
+
+  --backDropBlur: 6px;
+
+  --primaryFont: futura, futura-pt, helvetica;
+
+  --dialogBgBrightness: 70%;
+  --dialogBgHue: 120;
+  --dialogBackground: hsl(var(--dialogBgHue), 15%, var(--dialogBgBrightness));
+}
+body {
+  padding-top: 50px;
+}
+.devModeContainer {
+  position: fixed;
+  top: 80px;
+  left: 20px;
+
+  display: flex;
+  flex-direction: column;
+}
+.devModeContainer > * {
+  margin-bottom: 10px;
+}
+.devModeContainer .toolbox {
+  max-width: 240px;
+
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+
+  /* padding: 8px; */
+  border-radius: 8px;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+
+  background: rgba(111, 111, 111, 0.386);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.598);
+}
+.devModeContainer button {
+  height: 43px;
+  width: 43px;
+
+  margin: 8px;
+
+  font-size: 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+
+  border: none;
+  text-shadow: 0 0 10px black inset;
+
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.673);
+
+  transition: 150ms;
+}
+.devModeContainer button:hover {
+  transform: scale(1.08);
+}
+.devModeContainer button:active {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.673) inset;
+}
+/* .toolbox button ~ button {
+    margin-left: 7px;
+} */
+.toolbox button.quit {
+  background: rgb(245, 49, 49);
+}
+.toolbox button.log {
+  background: rgb(3, 3, 223);
+  color: rgb(201, 201, 201);
+}
+.toolbox button.reExecute {
+  background: rgb(70, 70, 70);
+  color: rgb(1, 194, 1);
+}
+.toolbox button.evalJS {
+  font-size: 2rem;
+  color: rgb(225, 206, 2);
+  background: rgb(70, 70, 70);
+}
+
+.userCountDisplay {
+  /* margin: 10px 0 0 0; */
+
+  color: rgb(24, 147, 5);
+  line-height: 0.5;
+  font-size: 1rem;
+  font-family: monospace;
+  text-shadow: 0 0 8px rgba(0, 0, 0, 0.598);
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+
+  padding: 1px 10px;
+  border-radius: 8px;
+
+  background: rgba(111, 111, 111, 0.386);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.598);
+}
+
+/*/////////////// custom dialogs ////////////////*/
+
+.dialogContainer {
+  z-index: 1090;
+
+  height: 100vh;
+  width: 100vw;
+  margin: 0;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  background: rgba(0, 0, 0, 0.58);
+
+  pointer-events: all;
+}
+.dialog {
+  z-index: 1100;
+
+  box-sizing: border-box;
+  padding: 15px;
+  font-family: "helvetica";
+
+  min-width: 280px;
+  max-width: 350px;
+
+  /* background: rgb(72, 72, 72); */
+  background: var(--dialogBackground);
+  /* background: hsl(0, 0%, var(--dialogBgBrightness)); */
+
+  border-radius: 8px;
+
+  pointer-events: all;
+
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+  --defaultScale: 1;
+  --initScale: 0.7;
+  transform: scale(0.8);
+
+  transition: 160ms;
+}
+.dialog.appear {
+  transform: scale(1);
+}
+.dialogText {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  line-break: break-all;
+}
+.dialogText h3 {
+  margin: 0;
+  color: rgb(41, 41, 41);
+}
+.dialogText p {
+  margin: 5px 0 0 0;
+  color: rgb(84, 84, 84);
+}
+.dialogInput {
+  display: flex;
+  justify-content: center;
+
+  margin: 10px 0 0;
+}
+.dialogInput.prompt {
+  flex-direction: column;
+  align-items: center;
+}
+.dialogInput.prompt :is(input[type="text"], input[type="range"]) {
+  margin: 0 0 20px;
+  font-size: 0.85rem;
+
+  border: none;
+  border-radius: 6px;
+  padding: 5px;
+
+  background: rgb(225, 225, 225);
+
+  transition: box-shadow 180ms;
+}
+.dialogInput.prompt input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 0 10px rgba(1, 77, 191, 0.755);
+}
+.dialogInput button {
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+
+  margin: 0 30px 0;
+  max-height: 25px;
+
+  font-size: 1rem;
+  font-weight: 650;
+  color: rgb(0, 115, 255);
+
+  transition: color 110ms, background-color 115ms;
+}
+.dialogInput button:last-child {
+  /* btn-primary */
+  background-color: #80808048;
+}
+.dialogInput button:active {
+  color: var(--dialogBackground);
+}
+.dialogInput button:is(:hover, :focus) {
+  background-color: #48484848;
+}
+@media (max-width: 600px) {
+  .dialog {
+    transform: scale(0.7);
+  }
+  .dialog.appear {
+    transform: scale(0.85);
+  }
+}
+
+.sliderInput {
+  -webkit-appearance: none;
+
+  height: 4px;
+  width: 150px;
+
+  margin-top: 5px;
+  /* margin-bottom: 10px; */
+
+  border: 1px solid black;
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    hsl(0, 100%, 50%),
+    hsl(300, 100%, 50%),
+    hsl(239, 100%, 50%),
+    hsl(184, 100%, 50%),
+    hsl(130, 100%, 50%),
+    hsl(59, 100%, 50%)
+  );
+}
+.sliderInput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 16px;
+  width: 5.5px;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  cursor: pointer;
+}
+.sliderInput::-moz-range-thumb {
+  height: 16px;
+  width: 5.5px;
+}
