@@ -1,6 +1,6 @@
-// fetch("http://floyd-api.herokuapp.com/webuntis")
-// .then(console.log)
-// .catch(() => { console.warn("something went wrong"); });
+fetch("http://localhost:3000/webuntis")
+.then(console.log)
+.catch((err) => { console.error("something went wrong: " + err); });
 
 const root = document.querySelector(":root");
 const hueSlider = document.querySelector("#hue-slider");
