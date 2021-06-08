@@ -222,21 +222,26 @@ const custom = {
         $(".dialogContainer").fadeTo(200, 1);
 
         return new Promise((resolve, reject) => {
-            clickPrimary = (event) => {
-                if (event.keyCode === 13) {
+            click = (event) => {
+                if (event.keyCode == 13) {
                     event.preventDefault();
                     event.stopPropagation();
                     buttonPressed("primary");
                 }
+                if (event.keyCode == 27) {
+                    event.preventDefault();
+                    event.stopPropagation();
+                    buttonPressed("secondary");
+                }
             };
 
-            document.addEventListener("keydown", clickPrimary, {capture: true});
+            document.addEventListener("keydown", click, {capture: true});
 
             buttonPressed = (response) => {
                 if (response == "primary") resolve(primaryBtn);
                 if (response == "secondary") reject(secondaryBtn);
 
-                document.removeEventListener("keydown", clickPrimary);
+                document.removeEventListener("keydown", click, {capture: true});
 
                 document.querySelector(".dialog").classList.remove("appear");
                 $(".dialogContainer").fadeTo(200, 0);
@@ -297,7 +302,7 @@ const custom = {
                 let input = document.querySelector(".promptInput").value;
                 resolve(input);
 
-                document.removeEventListener("keydown", click);
+                document.removeEventListener("keydown", click, {capture: true});
 
                 document.querySelector(".dialog").classList.remove("appear");
                 $(".dialogContainer").fadeTo(200, 0);
@@ -313,7 +318,7 @@ const custom = {
      * @param {string} text
      * @returns {Promise<number>} input value
      */
-    slider: (title, text, callback) => {
+    slider: (title, text, sliderVal, callback) => {
         //input formatting
         if (title == ("" || "no title")) title = undefined;
 
@@ -331,7 +336,7 @@ const custom = {
                 <p>${text}</p>
             </div>
             <div class='dialogInput prompt'>
-                <input class="sliderInput" type="range" value="${root.style.getPropertyValue("--primary-clr-hue")}" min="0" max="360">
+                <input class="sliderInput" type="range" value="${sliderVal}" min="0" max="360">
                 <button onclick='buttonPressed()'>OK</button>
             </div>
         </div>
@@ -345,9 +350,9 @@ const custom = {
         document.querySelector(".dialog").classList.add("appear");
         $(".dialogContainer").fadeTo(200, 1);
 
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, _reject) => {
             click = (event) => {
-                if (event.keyCode === 13) {
+                if (event.keyCode === 13 || event.keyCode === 27) {
                     event.preventDefault();
                     event.stopPropagation();
                     buttonPressed();
@@ -357,10 +362,9 @@ const custom = {
             document.addEventListener("keydown", click, {capture: true});
 
             buttonPressed = () => {
-                let input = document.querySelector(".sliderInput").value;
-                resolve(input);
+                resolve(document.querySelector(".sliderInput").value);
 
-                document.removeEventListener("keydown", click);
+                document.removeEventListener("keydown", click, {capture: true});
 
                 document.querySelector(".dialog").classList.remove("appear");
                 $(".dialogContainer").fadeTo(200, 0);

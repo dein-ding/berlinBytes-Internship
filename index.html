@@ -20,28 +20,33 @@
       <header>
          <h1 class="logo">LOGO</h1>
          <button class="change-clr-btn" onclick="action()">change Color</button>
-         <input type="text" class="search-bar" placeholder="search..." />
+         <div class="search-bar-container removeFocusClick">
+            <input type="text" class="search-bar removeFocusClick" placeholder="search google..." />
+               <i class="fad fa-search search-icon removeFocusClick"></i>
+               <i class="fad fa-times-circle cancel-icon removeFocusClick"></i>
+               <a id="google-query" target="_blank" style="display: none;">google</a>
+         </div>
          <nav>
            <!-- prettier-ignore -->
             <ul class="nav-list">
                <li>
-                  <a href="#home"><i class="fad fa-home-lg-alt"></i> Home</a>
+                  <a href="#home" class="dummy"><i class="fad fa-home-lg-alt"></i> Home</a>
                </li>
                <li>
-                  <a href="#about"><i class="fad fa-address-card"></i> About Us</a>
+                  <a href="#about" class="dummy"><i class="fad fa-address-card"></i> About Us</a>
                </li>
                <li>
-                  <a href="#services"><i class="fad fa-concierge-bell"></i> Services</a>
+                  <a href="#services" class="dummy"><i class="fad fa-concierge-bell"></i> Services</a>
                </li>
                <li>
-                  <a href="#login"><i class="fad fa-sign-in-alt"></i> Login</a>
+                  <a href="#login" class="dummy"><i class="fad fa-sign-in-alt"></i> Login</a>
                </li>
             </ul>
          </nav>
       </header>
       <main>
          <section class="hero" id="hero">
-            <div>
+            <div class="videoContainer">
                <video src="videos/background.mov" autoplay loop mute></video>
                <h1>Title Here</h1>
             </div>
