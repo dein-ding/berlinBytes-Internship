@@ -117,21 +117,6 @@ $(document).ready(async () => {
     var footer = document.querySelector("#footer");
     const body = document.body;
 
-    //variables
-    var locationURL = {
-        prev: sessionStorage.currURL ? sessionStorage.currURL : undefined, //prettier-ignore
-        curr: location.pathname,
-    };
-    sessionStorage.currURL = location.pathname;
-    sessionStorage.prevURL = locationURL.prev;
-
-    //create link for favicon
-    const linkFavicon = document.createElement("LINK");
-    linkFavicon.rel = "shortcut icon";
-    linkFavicon.type = "image/png";
-    linkFavicon.href = "favicon.png";
-    head.prepend(linkFavicon);
-
     // adds a prefix before the title
     titleTag.innerText = "website - " + titleTag.innerText;
 
@@ -172,11 +157,10 @@ test = async (type) => {
 };
 
 getFile = (URL) => {
-    var XHR = new XMLHttpRequest();
+    let XHR = new XMLHttpRequest();
     XHR.open("GET", URL, false);
     XHR.send();
 
-    //console.log("injected:" + XHR.responseText);
     return XHR.responseText;
 };
 
@@ -336,7 +320,7 @@ const custom = {
                 <p>${text}</p>
             </div>
             <div class='dialogInput prompt'>
-                <input class="sliderInput" type="range" value="${sliderVal}" min="0" max="360">
+                <input class="sliderInput colorSlider" id="colorSlider" type="range" value="${sliderVal}" min="0" max="360">
                 <button onclick='buttonPressed()'>OK</button>
             </div>
         </div>
